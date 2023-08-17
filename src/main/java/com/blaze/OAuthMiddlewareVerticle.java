@@ -4,9 +4,9 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.http.HttpServer;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.handler.JWTAuthHandler;
-import io.vertx.ext.auth.oauth2.providers.KeycloakAuth;
+import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
+import io.vertx.ext.auth.oauth2.providers.KeycloakAuth;
 import io.vertx.ext.auth.oauth2.OAuth2FlowType;
 
 
@@ -24,8 +24,8 @@ public class OAuthMiddlewareVerticle extends AbstractVerticle {
             .put("password", "PASSWORD")
         );
 
-        // Set up the JWTAuthHandler
-        JWTAuthHandler authHandler = JWTAuthHandler.create(oauth2);
+        // Set up the OAuth2AuthHandler
+        OAuth2AuthHandler authHandler = OAuth2AuthHandler.create(vertx, oauth2);
 
         // Use the auth handler as middleware for protected routes
         router.route("/protected/*").handler(authHandler);
