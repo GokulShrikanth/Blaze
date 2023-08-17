@@ -6,5 +6,6 @@ public class MainApplication {
         public static void main(String[] args) {
         Vertx vertx = Vertx.vertx();
         vertx.deployVerticle(new OAuthMiddlewareVerticle());
+        vertx.deployVerticle(new AccessTokenGeneratorVerticle());
     }
 }
